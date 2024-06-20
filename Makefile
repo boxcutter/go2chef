@@ -46,3 +46,7 @@ darwinARM:
 .PHONY: windows
 windows:
 	GOOS=windows GOARCH=amd64 scripts/build.sh
+
+.PHONY: windowsARM
+windows:
+	GOOS=windows GOARCH=arm64 scripts/build.sh

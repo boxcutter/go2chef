@@ -28,14 +28,14 @@ jobs:
       run: make test
     - name: Build on Windows
       if: runner.os == 'windows'
-      run: ./scripts/build.sh
+      run: ${{ matrix.arch == 'amd64' && 'make windows' || 'make windowsARM' }}
       env:
         GOOS: windows
         GOARCH: ${{ matrix.arch }}
       shell: bash
     - name: Build on OSX
       if: runner.os == 'macos'
-      run: make darwin
+      run: ${{ matrix.arch == 'amd64' && 'make darwin' || 'make darwinARM' }}
       env:
         GOARCH: ${{ matrix.arch }}
     - name: Build on Linux
@@ -47,17 +47,17 @@ jobs:
       if: runner.os == 'windows'
       uses: actions/upload-artifact@v4
       with:
-        name: windows-binary
-        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
+        name: go2chef-windows-${{ matrix.arch }}
+        path: ${{ runner.os == 'windows' && matrix.arch == 'amd64' && 'build/windows/amd64/go2chef' || 'build/windows/arm64/go2chef' }}
     - name: Archive build artifacts
       if: runner.os == 'macos'
       uses: actions/upload-artifact@v4
       with:
         name: macos-binary
-        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
+        path: ${{ runner.os == 'macos' && matrix.arch == 'amd64' && 'build/macos/amd64/go2chef' || 'build/macos/arm64/go2chef' }}
     - name: Archive build artifacts
       if: runner.os == 'linux'
       uses: actions/upload-artifact@v4
       with:
-        name: linux-binary-${{ matrix.arch }}
+        name: go2chef-linux-${{ matrix.arch }}
         path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
