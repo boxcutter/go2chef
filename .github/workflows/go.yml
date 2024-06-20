@@ -52,7 +52,8 @@ jobs:
     - name: Generate SHA256 checksum on Windows
       if: runner.os == 'Windows'
       run: |
-        Get-ChildItem -Recurse build | Get-FileHash -Algorithm SHA256 | ForEach-Object { "$($_.Hash) $($_.Path)" } > checksums.txt
+        Set-Location -Path build
+        Get-ChildItem -Recurse | Get-FileHash -Algorithm SHA256 | ForEach-Object { "$($_.Hash) $($_.Path)" } > ../checksums.txt
       shell: pwsh
     - name: Archive build artifacts on Windows
       if: runner.os == 'windows'
