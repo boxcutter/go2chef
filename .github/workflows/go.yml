@@ -40,7 +40,7 @@ jobs:
         GOARCH: ${{ matrix.arch }}
     - name: Build on Linux
       if: runner.os == 'linux'
-      run: make linux
+      run: ${{ runner.os == 'linux' && matrix.arch == 'amd64' || make linux || make linuxARM }}
       env:
         GOARCH: ${{ matrix.arch }}
     - name: Archive build artifacts
