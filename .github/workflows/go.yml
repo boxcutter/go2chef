@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     name: Test + Build
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -14,6 +13,7 @@ jobs:
         exclude:
           - os: windows-latest
             arch: arm64
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Set up Go 1.16
       uses: actions/setup-go@v5
