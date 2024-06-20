@@ -28,7 +28,7 @@ linux:
 	GOOS=linux GOARCH=amd64 scripts/build.sh
 
 .PHONY: linuxARM
-linux:
+linuxARM:
 	GOOS=linux GOARCH=arm64 scripts/build.sh
 
 .PHONY: linux32
