@@ -19,3 +19,10 @@ jobs:
           run-id: 9604597430
       - name: Display structure of downloaded files
         run: ls -R
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: go2chef-*
+          tag: ${{ github.ref }}
+
