@@ -45,19 +45,19 @@ jobs:
       run: ${{ matrix.arch == 'amd64' && 'make linux' || 'make linuxARM' }}
       env:
         GOARCH: ${{ matrix.arch }}
-    - name: Archive build artifacts
+    - name: Archive build artifacts on Windows
       if: runner.os == 'windows'
       uses: actions/upload-artifact@v4
       with:
         name: go2chef-windows-${{ matrix.arch }}
-        path: ${{ runner.os == 'windows' && matrix.arch == 'amd64' && 'build/windows/amd64/go2chef' || 'build/windows/arm64/go2chef' }}
-    - name: Archive build artifacts
+        path: ${{ runner.os == 'windows' && matrix.arch == 'amd64' && 'build/windows/amd64/go2chef.exe' || 'build/windows/arm64/go2chef.exe' }}
+    - name: Archive build artifacts on MacOS
       if: runner.os == 'macos'
       uses: actions/upload-artifact@v4
       with:
         name: go2chef-macos-${{ matrix.arch }}
         path: ${{ runner.os == 'macos' && matrix.arch == 'amd64' && 'build/darwin/amd64/go2chef' || 'build/darwin/arm64/go2chef' }}
-    - name: Archive build artifacts
+    - name: Archive build artifacts on Linux
       if: runner.os == 'linux'
       uses: actions/upload-artifact@v4
       with:
