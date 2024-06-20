@@ -15,6 +15,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: 9604597430
       - name: Display structure of downloaded files
         run: ls -R
