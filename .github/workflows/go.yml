@@ -52,7 +52,7 @@ jobs:
     - name: Generate SHA256 checksum on Windows
       if: runner.os == 'Windows'
       run: |
-        certutil -hashfile build/*/*/* SHA256 > checksums.txt
+        certutil -hashfile build/windows/amd64/go2chef.exe SHA256 > checksums.txt
     - name: Archive build artifacts on Windows
       if: runner.os == 'windows'
       uses: actions/upload-artifact@v4
