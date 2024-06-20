@@ -9,7 +9,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         arch: [amd64, arm64]
     steps:
     - name: Set up Go 1.16
@@ -35,6 +36,8 @@ jobs:
     - name: Build on OSX
       if: runner.os == 'macos'
       run: make darwin
+      env:
+        GOARCH: ${{ matrix.arch }}
     - name: Build on Linux
       if: runner.os == 'linux'
       run: make linux
@@ -45,13 +48,13 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: windows-binary
-        path: path/to/windows/binary
+        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
     - name: Archive build artifacts
       if: runner.os == 'macos'
       uses: actions/upload-artifact@v4
       with:
         name: macos-binary
-        path: path/to/macos/binary
+        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
     - name: Archive build artifacts
       if: runner.os == 'linux'
       uses: actions/upload-artifact@v4
