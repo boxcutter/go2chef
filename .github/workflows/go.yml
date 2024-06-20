@@ -55,8 +55,8 @@ jobs:
       if: runner.os == 'macos'
       uses: actions/upload-artifact@v4
       with:
-        name: macos-binary
-        path: ${{ runner.os == 'macos' && matrix.arch == 'amd64' && 'build/macos/amd64/go2chef' || 'build/macos/arm64/go2chef' }}
+        name: go2chef-linux-${{ matrix.arch }}
+        path: ${{ runner.os == 'macos' && matrix.arch == 'amd64' && 'build/darwin/amd64/go2chef' || 'build/darwin/arm64/go2chef' }}
     - name: Archive build artifacts
       if: runner.os == 'linux'
       uses: actions/upload-artifact@v4
