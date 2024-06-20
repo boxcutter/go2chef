@@ -45,6 +45,9 @@ jobs:
       run: ${{ matrix.arch == 'amd64' && 'make linux' || 'make linuxARM' }}
       env:
         GOARCH: ${{ matrix.arch }}
+    - name: Generate SHA256 checksum
+      run: |
+        shasum -a 256 build/*/*/* > checksums.txt
     - name: Archive build artifacts on Windows
       if: runner.os == 'windows'
       uses: actions/upload-artifact@v4
