@@ -57,4 +57,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: linux-binary-${{ matrix.arch }}
-        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef'
+        path: ${{ runner.os == 'linux' && matrix.arch == 'amd64' && 'build/linux/amd64/go2chef' || 'build/linux/arm64/go2chef' }}
